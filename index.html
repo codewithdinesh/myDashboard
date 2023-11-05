@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productivity Dashboard</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glassmorphic-bg {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* Style for sidebar */
+        .sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* .sidebar-closed {
+            transform: translateX(-10%);
+        }
+
+        .sidebar-open {
+            /* transform: translateY(100%); */
+        }
+
+        */
+    </style>
+
+
+</head>
+
+<body
+    class="container mx-auto p-1 bg-gradient-to-tl justify-center  from-slate-500 to-black min-h-screen block md:flex">
+
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <div class="md:hidden flex items-center justify-end p-4">
+        <button id="toggleSidebar" class="text-white">
+            &#9776;
+        </button>
+    </div>
+
+    <!-- Sidebar (Responsive) -->
+    <aside class="bg-gradient-to-tl mb-1 from-slate-500 to-slate-700 rounded text-white p-4 w-16 md:w-1/4 rounded-lg mx-1
+        sidebar-closed w-full sidebar hidden md:block">
+
+        <h1 class="text-xl md:text-2xl font-semibold text-white text-center mb-6 p-2 rounded">
+            My Dashboard
+        </h1>
+
+        <!-- Profile Card -->
+        <div class="mt-4 p-4 glassmorphic-bg rounded-lg hover:bg-blue-100 hover:bg-opacity-20 cursor-pointer">
+            <img src="./images/profile-img.jpg" alt="Your Name" class="w-32 h-32 mx-auto rounded-full mb-2">
+            <h2 class="text-xl font-semibold text-white text-center">Hi, Dinesh</h2>
+        </div>
+
+        <!-- Daily Check-in Section in the Sidebar -->
+        <div class="hidden md:block">
+            <div class="mt-4 glassmorphic-bg p-2 rounded hover:bg-blue-100 hover:bg-opacity-20 cursor-pointer">
+                <p class="text-white text-center font-semibold">Current Streak</p>
+                <p id="streak-sidebar" class="text-white text-center font-semibold text-2xl"></p>
+            </div>
+        </div>
+
+        <div class="mt-8 p-4 glassmorphic-bg rounded-lg">
+            <h2 class="text-lg md:text-xl text-white text-center font-semibold">Joke of the Day</h2>
+            <p class="text-sm text-white text-center" id="joke">Loading joke...</p>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="  to-p-4 flex-1  shadow-xl rounded-lg max-h-fit ">
+        <div class=" px-4 py-6 glassmorphic-bg rounded-lg shadow-xl    ">
+
+            <!-- Quotes Section (Fetch from API) -->
+            <div class="my-8 p-4 glassmorphic-bg rounded-lg">
+                <p id="quote" class="text-lg md:text-xl text-white text-center">
+                    Loading quote...
+                </p>
+            </div>
+
+
+            <!-- Cards section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4" id="cards">
+
+                <!-- GitHub Card -->
+                <a class=" bg-transparent glassmorphic-bg bg-opacity-10 hover:bg-opacity-20 rounded-lg shadow-md"
+                    href="https://github.com/codewithdinesh">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/github.svg" alt="GitHub" class="w-16 h-16 mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">GitHub</h2>
+                    </div>
+                </a>
+
+                <!-- LeetCode Card -->
+                <a class="bg-gradient-to-tl from-slate-500 to-slate-800 hover:from-slate-500 hover:to-sky-300  rounded-lg shadow-md"
+                    href="https://leetcode.com/dineshrathod0198/" target="_blank">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/leetcode.svg" alt="LeetCode" class="w-16 h-16 mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">LeetCode</h2>
+                    </div>
+                </a>
+
+                <!--GFG Card -->
+                <a class="bg-gradient-to-tl bg-transparent hover:from-slate-500 hover:to-sky-300  rounded-lg shadow-md"
+                    href="https://practice.geeksforgeeks.org/problem-of-the-day" target="_blank">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/gfg.svg" alt="GFG" class="w-16 h-16 mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">GFG</h2>
+                    </div>
+                </a>
+
+                <!-- Coding Ninja -->
+                <a class="bg-gradient-to-tl from-slate-500 to-slate-800 hover:from-slate-500 hover:to-sky-300  rounded-lg shadow-md"
+                    href="https://www.codingninjas.com/studio/problem-of-the-day" target="_blank">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/coding-ninja.png" alt="Coding Ninja" class="w-16 items-center mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">Coding Ninja</h2>
+                    </div>
+                </a>
+
+
+                <!-- TakeUforward -->
+                <!-- All coding Platform -->
+                <!-- Hugging Face -->
+                <!-- Kaggle -->
+                <!-- Vercel -->
+
+
+            </div>
+
+            <!-- Social Medias -->
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 my-5" id="cards">
+
+                <!-- Linkedin Card -->
+                <a class="bg-gradient-to-r  hover:from-slate-500 hover:to-sky-300  rounded-lg shadow-md"
+                    href="https://www.codingninjas.com/studio/problem-of-the-day" target="_blank">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/linkedin.png" alt="Linkedin" class="w-16 h-16 mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">Linkedin</h2>
+                    </div>
+                </a>
+
+                <!-- huggingFace Card -->
+                <a class=" bg-white bg-opacity-10 hover:bg-opacity-20 rounded-lg shadow-md" target="_blank"
+                    href="https://huggingface.co/dineshrathod">
+                    <div class=" p-4 rounded-lg shadow-md">
+                        <img src="./images/huggingface.svg" alt="LeetCode" class="w-16 h-16 mx-auto mb-2">
+                        <h2 class="text-xl font-semibold text-white text-center">HuggingFace</h2>
+                    </div>
+                </a>
+
+
+            </div>
+
+
+
+            <!-- Current Tasks Section -->
+            <!-- ... (Current tasks section remains the same) ... -->
+
+        </div>
+    </main>
+</body>
+<!-- JavaScript for Sidebar Toggle -->
+<script>
+    const toggleButton = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementsByClassName('sidebar')[0];
+
+    toggleButton.addEventListener('click', () => {
+        console.log("clicked");
+
+        sidebar.classList.toggle('hidden');
+        sidebar.classList.toggle('block');
+
+    });
+
+</script>
+<!-- JavaScript to Fetch and Display Quote -->
+<script>
+    // Function to fetch and display a random quote
+    async function getQuote() {
+        const quoteElement = document.getElementById('quote');
+
+        try {
+            const response = await fetch('https://api.quotable.io/quotes/random');
+            if (response.ok) {
+                const data = await response.json();
+                quoteElement.textContent = data[0].content;
+                // console.log(data[0].content)
+            } else {
+                quoteElement.textContent = 'Failed to fetch a quote.';
+                console.error('Failed to fetch quote:', response.status);
+            }
+        } catch (error) {
+            quoteElement.textContent = 'Failed to fetch a quote.';
+            console.error('Failed to fetch quote:', error);
+        }
+    }
+
+    // Call the getQuote function when the page loads
+    window.addEventListener('load', getQuote);
+</script>
+
+
+<!-- JavaScript to Fetch and Display Joke -->
+<script>
+    // Function to fetch and display a random Joke
+    async function getJoke() {
+        const quoteElement = document.getElementById('joke');
+
+        try {
+            const response = await fetch('https://v2.jokeapi.dev/joke/Any?type=single');
+            if (response.ok) {
+                const data = await response.json();
+                quoteElement.textContent = data.joke;
+                // console.log(data[0].content)
+            } else {
+                quoteElement.textContent = 'Failed to fetch a quote.';
+                console.error('Failed to fetch quote:', response.status);
+            }
+        } catch (error) {
+            quoteElement.textContent = 'Failed to fetch a quote.';
+            console.error('Failed to fetch quote:', error);
+        }
+    }
+
+    // Call the getQuote function when the page loads
+    window.addEventListener('load', getJoke);
+
+</script>
+
+<!-- Streak  -->
+<script>
+
+    // Check if the user has already checked in for the day and retrieve streak from localStorage
+    const today = new Date().toLocaleDateString();
+
+    let streak = parseInt(localStorage.getItem('streak')) || 0;
+
+    document.getElementById('streak-sidebar').textContent = streak;
+
+    // Function to update the streak and perform the daily check-in
+    const updateStreakAndCheckIn = () => {
+        const checkedIn = localStorage.getItem('dailyCheckIn') === today;
+
+        const checkin = document.getElementById('checkin');
+        if (!checkedIn) {
+            // Increase the streak and perform the check-in
+            streak++;
+            localStorage.setItem('dailyCheckIn', today);
+            localStorage.setItem('streak', streak);
+            // document.getElementById('checkinStatus').textContent = 'Great job! You completed your tasks today.';
+        }
+
+        // document.getElementById('streak').textContent = streak;
+        document.getElementById('streak-sidebar').textContent = streak;
+    };
+
+    // Attach the update streak and check-in function to various elements on the page
+    const elements = document.querySelectorAll('a, button'); // You can add more elements if needed
+    elements.forEach(element => {
+        element.addEventListener('click', updateStreakAndCheckIn);
+    });
+
+    // Initialize and display the current streak
+    document.getElementById('streak').textContent = streak;
+    document.getElementById('streak-sidebar').textContent = streak;
+
+
+
+</script>
+
+</html>
