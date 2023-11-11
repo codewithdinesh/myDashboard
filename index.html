@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productivity Dashboard</title>
     <!-- <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet"> -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
+    <link href="style/output.css" rel="stylesheet">
+
     <style>
         .glassmorphic-bg {
             background: rgba(255, 255, 255, 0.1);
@@ -58,7 +61,7 @@
         </div>
 
         <!-- Daily Check-in Section in the Sidebar -->
-        <div class="hidden md:block">
+        <div class="block">
             <div class="mt-4 glassmorphic-bg p-2 rounded hover:bg-blue-100 hover:bg-opacity-20 cursor-pointer">
                 <p class="text-white text-center font-semibold">Current Streak</p>
                 <p id="streak-sidebar" class="text-white text-center font-semibold text-2xl"></p>
@@ -88,7 +91,7 @@
 
                 <!-- GitHub Card -->
                 <a class=" bg-transparent glassmorphic-bg bg-opacity-10 hover:bg-opacity-20 rounded-lg shadow-md"
-                    href="https://github.com/codewithdinesh">
+                    href="https://github.com/codewithdinesh" target="_blank">
                     <div class=" p-4 rounded-lg shadow-md">
                         <img src="./images/github.svg" alt="GitHub" class="w-16 h-16 mx-auto mb-2">
                         <h2 class="text-xl font-semibold text-white text-center">GitHub</h2>
@@ -124,13 +127,44 @@
 
 
                 <!-- TakeUforward -->
+
                 <!-- All coding Platform -->
                 <!-- Hugging Face -->
                 <!-- Kaggle -->
                 <!-- Vercel -->
 
 
+
+
             </div>
+
+            <!-- Internships -->
+            <div class="block">
+                <div
+                    class="mt-4 text-white glassmorphic-bg p-2 rounded hover:bg-blue-100 hover:bg-opacity-20 cursor-pointer">
+                    <h1 class=" font-bold w-full p-5">Internship Related</h1>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 my-5" id="cards">
+
+                <!-- Internshala -->
+                <a class=" rounded-lg shadow-md" href="https://internshala.com/student/dashboard" target="_blank">
+                    <div
+                        class=" text-white glassmorphic-bg hover:bg-blue-100 hover:bg-opacity-20  p-4 rounded-lg shadow-md bg-white">
+
+                        <div class="p-2 bg-white">
+
+                            <img src="./images/Internshala.png" alt="Internshala"
+                                class="w-16 items-center mx-auto mb-2 ">
+                        </div>
+                        <h2 class="text-xl font-semibold text-white text-center">Internshala</h2>
+                    </div>
+                </a>
+
+                <!-- Take you forward -->
+
+            </div>
+            <!-- Freelancing -->
 
             <!-- Social Medias -->
 

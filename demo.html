@@ -1,51 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Sidebar</title>
-    <!-- Include the Tailwind CSS framework -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <title>Microsoft To-Do List</title>
 </head>
 
-<body class="bg-gray-100">
-    <div class="flex h-screen">
-        <!-- Sidebar (hidden on small screens) -->
-        <aside class="w-1/6 bg-gray-800 text-white hidden md:block">
-            <ul class="py-6">
-                <li class="py-2 px-4">
-                    <a href="#" class="block hover:bg-gray-600">Dashboard</a>
-                </li>
-                <li class="py-2 px-4">
-                    <a href="#" class="block hover:bg-gray-600">Products</a>
-                </li>
-                <li class="py-2 px-4">
-                    <a href="#" class="block hover:bg-gray-600">Orders</a>
-                </li>
-                <li class="py-2 px-4">
-                    <a href="#" class="block hover:bg-gray-600">Customers</a>
-                </li>
-            </ul>
-        </aside>
+<body>
+    <h1>My Microsoft To-Do List</h1>
 
-        <!-- Content -->
-        <main class="flex-1 p-4">
-            <!-- Toggle button for the sidebar (visible on small screens) -->
-            <button class="md:hidden text-white" id="sidebar-toggle">☰</button>
-            <h1 class="text-2xl font-semibold">Dashboard</h1>
-            <p>Your content goes here.</p>
-        </main>
-    </div>
+    <ul id="todo-list"></ul>
 
     <script>
-        // JavaScript to toggle the sidebar on small screens
-        const sidebarToggle = document.getElementById("sidebar-toggle");
-        const sidebar = document.querySelector("aside");
+        // Get your to-do list from the Microsoft To-Do API.
+        const getTodoList = async () => {
+            const accessToken = 'EwBwA8l6BAAUAOyDv0l6PcCVu89kmzvqZmkWABkAAc2y4G7E0yv3sYVSq0GYTCpyUYSpmo6KrWdQxnmCl3O416Vt+ACpb67bVdSNLZHONZZA9NYkxx2TpxNvLJaAfwMsjZ3UIFkvpRvSE/FU1uRPedvGlnxMroaWp/oS+QmBPrhYJl920XiuH1+DMBCRVaVaLD7weAfcTWcdkTbJSdAswo2IAVyIpNnqdOQ6pgiSwWakiY+05YIfGQ7gC7H0wun42FEBkvO2TtMF6G94c4VB0Zv20g7E8XV80sorNHM8FT+kTFbtzkaIrzx4ta6DLTvnQBgoewizhqe1St6Yc2GL5iU/duhQqcOEdHO5nhOQn4HwmlJsy8gvwOKTsW89Mn4DZgAACPYwmOZWYNmTQAKuQvA27g9EG82Wqhh/U3OCaWc9PMKkrAmUqsVW1urDU8D2U7GHNrs1m9KoQgW7IYcBXEi/pcLLcDid9q9/uRMUeRSamA5imVdm6T0vhUo/d4a7yPs17DLxsYna7CgLPe7S3V8u+gfcbq4OGHr+iwTIfZmOquNIRWJyJ2kgDzv3/ypGapOKmDqLdBmGpkwSwy4IlHWnF9GaOTmNv+U+kzshXSyi4yxuuxwHbCA0Bj5s2CELfKsIVw15WYz4kAAB8kNaRJ42x/BPDO/ir8cFMUsinwMj6/rIaeNWDD/JMn9dyeQXpiAV3XL/pYSZp+Cv94wfFW59Jq/mRy4xw1HM26oDBocfUCDiOUEECBymrODeNr4cM98qSACKFRCF85S51413JCA0efcuL9aeBGjiSS3eNO54z+GmvwdKsPlsZEhCZ5SkB82eabdZDBuXtzOp0pVuMpT8XB8GWRg5rIL/HP/B+MAX/ER2fEB51/S8s6Uivi92z5L5wX/aEuVPqbcn4g323IoCppFlbtCRp019iypjRSNsOElWDvjuQBqaipdVFII3XTAxE232cLOPCLcWlADwS8zlMpwL3ZxPdTBWy6QxeXkMwoZ1QD6va3ekc18eyZxq3soEOA9zBu1iNJrro4nL0/4g+JruNou/WBrQrHLc+ZINYNnT4HtBlT7eMCnYqdfm75Lkc9V2Eso02MgAuZDUeMyR2wTSXiEXR2mXhZ8q6olKMPnEp/kjY+Jg75PVzV9ZYzXg6+k5iGrsjN1uDyKMAg==';
 
-        sidebarToggle.addEventListener("click", () => {
-            sidebar.classList.toggle("hidden");
-        });
+            const response = await fetch('https://graph.microsoft.com/v1.0/me/todo/lists', {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            const todoLists = await response.json();
+
+            console.log(todoLists)
+
+            // Get the first to-do list.
+            const todoList = todoLists.value[0];
+
+            // Get the tasks for the to-do list.
+            const tasksResponse = await fetch(`https://graph.microsoft.com/v1.0/me/todo/lists/${todoList.id}/tasks`, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                },
+            });
+            const tasks = await tasksResponse.json();
+
+            // Display the tasks in the HTML list.
+            const todoListElement = document.getElementById('todo-list');
+            for (const task of tasks.value) {
+                const todoItemElement = document.createElement('li');
+                todoItemElement.textContent = task.title;
+                todoListElement.appendChild(todoItemElement);
+            }
+        };
+
+        // Get the to-do list.
+        getTodoList();
     </script>
 </body>
 

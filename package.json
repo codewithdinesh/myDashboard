@@ -1,0 +1,27 @@
+{
+  "name": "dineshdashboard",
+  "version": "1.0.0",
+  "description": "This is My Personal dashboard to inhance my productivity.",
+  "main": "indext.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss build style/index.css -o style/output.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codewithdinesh/myDashboard.git"
+  },
+  "keywords": [
+    "Dashboard"
+  ],
+  "author": "codewithdinesh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codewithdinesh/myDashboard/issues"
+  },
+  "homepage": "https://github.com/codewithdinesh/myDashboard#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "tailwindcss": "^3.3.5"
+  }
+}
